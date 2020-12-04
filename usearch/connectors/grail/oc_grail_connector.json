@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "schedule": "0 */2 * * *",
+  "action": {
+    "startWorkflow": {
+      "domain": "uSearch_Connector",
+      "taskList": "uSearch_Connector_TaskList",
+      "workflowName": "code.uber.internal/usearch/connector-framework/orchestrator/workflow.ConnectorWorkflow",
+      "input": "{ \"DataSourceType\": \"OCGrailStore\", \"DeepRefreshEnable\": true }",
+      "taskStartToCloseTimeoutInSeconds": 3600,
+      "lisaSvcName": "soadb_master_127.5.8.186:17025"
+    }
+  },
+  "executionScope": "global",
+  "actionTimeoutInSeconds": 3600,
+  "enabled": true,
+  "metricsNamespace": "oc-grail-connector-scheduler"
+}

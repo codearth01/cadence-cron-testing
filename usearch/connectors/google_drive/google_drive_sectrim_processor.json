@@ -1,0 +1,17 @@
+{
+    "schemaVersion": "1.0.0",
+    "schedule": "0 0 * * *",
+    "action": {
+    	"startWorkflow": {
+			"domain": "uSearch_Connector",
+			"taskList": "uSearch_Connector_TaskList",
+			"workflowName": "code.uber.internal/usearch/connector-framework/orchestrator/workflow.SectrimProcessWorkflow",
+			"input": "\"GoogleDrive\"",
+			"taskStartToCloseTimeoutInSeconds": 7200
+		}
+    },
+    "executionScope": "global",
+    "actionTimeoutInSeconds": 7200,
+    "enabled": true,
+    "metricsNamespace": "googledrive-sectrim-scheduler"
+}
