@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "schedule": "0 */2 * * *",
+  "schedule": "*/2 * * * *",
   "action": {
     "startWorkflow": {
       "domain": "uSearch_Connector",
