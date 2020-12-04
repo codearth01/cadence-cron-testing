@@ -1,0 +1,17 @@
+{
+    "schemaVersion": "1.0.0",
+    "schedule": "20 * * * *",
+    "action": {
+    	"startWorkflow": {
+			"domain": "uSearch_Connector",
+			"taskList": "uSearch_Connector_TaskList",
+			"workflowName": "code.uber.internal/usearch/connector-framework/orchestrator/workflow.ConnectorWorkflow",
+			"input": "{ \"DataSourceType\": \"GoogleDrive\", \"MetadataExtractEnable\": true, \"DatasourceParameters\": { \"selected_mime_types\": \"image/vnd.adobe.photoshop,image/webp,audio/vnd.wave,audio/mpeg,image/heic,video/mp4,video/quicktime,audio/vnd.wave,image/svg+xml,image/png,image/jpeg,image/bmp,image/gif,image/x-windows-bmp,application/octet-stream,multipart/x-zip,application/zip,application/zip-compressed,application/x-zip-compressed,application/x-tgz,application/x-gtar,application/x-rar-compressed,application/bzip2,application/octet-stream,application/x-bz2,application/x-bzip,application/x-compressed,application/x-stuffit,application/x-7z-compressed,application/x-ace,application/x-compressed-tar,application/gzip,application/vnd.google-apps.folder,application/vnd.google-apps.photo,application/vnd.google-apps.shortcut,application/vnd.google-apps.unknown,application/vnd.google-apps.video,application/vnd.google-apps.audio,application/vnd.google-apps.drive-sdk,application/vnd.google-apps.drawing,application/vnd.google-apps.map,application/vnd.google-apps.script\", \"selection_type\": \"exclude\" }, \"DeepRefreshEnable\": false, \"DataProcessingConcurreny\": 20, \"DataProcessingActivityCount\": 400 }",
+			"taskStartToCloseTimeoutInSeconds": 3600
+		}
+    },
+    "executionScope": "global",
+    "actionTimeoutInSeconds": 3600,
+    "enabled": true,
+    "metricsNamespace": "googledrive-connector-scheduler"
+}
