@@ -15,6 +15,6 @@
     "dca"
   ],
   "actionTimeoutInSeconds": 432000,
-  "enabled": true,
+  "enabled": false,
   "metricsNamespace": "googledrive-connector-scheduler"
 }
