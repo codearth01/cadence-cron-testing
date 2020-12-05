@@ -16,5 +16,5 @@
   ],
   "actionTimeoutInSeconds": 432000,
   "enabled": false,
-  "metricsNamespace": "googledrive-connector-scheduler-staging"
+  "metricsNamespace": "googledrive-connector-scheduler"
 }
