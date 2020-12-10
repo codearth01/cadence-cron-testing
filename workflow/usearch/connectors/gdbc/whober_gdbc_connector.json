@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "schedule": "*/15 * * * *",
+  "action": {
+    "startWorkflow": {
+      "domain": "uSearch_Connector",
+      "taskList": "uSearch_Connector_TaskList",
+      "workflowName": "code.uber.internal/usearch/connector-framework/orchestrator/workflow.ConnectorWorkflow",
+      "input": "{ \"DataSourceType\": \"GDBC\", \"DatasourceParameters\":{\"data_source\": \"Whober\", \"db_query\": \"SELECT employees.*, badge_group, assit_name, tags, team_names FROM ( SELECT `employee_id`, `first_name`, `last_name`, `unix_name`, `work_email`, `business_title`, `phone_number`, `employee_type`, `start_date`, `end_date`, `manager_id`, `supervisory_org`, `world_region`, `nick_name`, `quote`, `preferred_first_name`, `preferred_last_name`, `building_address`, `bio`, `user_input_phone_number`, `duo_phone_number`, `location`, `street_address1`, `suite_number1`, `city1`, `state1`, `zipcode1`, `country1`, `personal_email`, `agency`, `cost_center`, `uuid`, `timezone`, NULLIF(CONCAT_WS(', ', `city1`, `state1`, `country1`), '') AS citystatectry, `street_address1` AS location1 FROM employees WHERE is_active = 1 ) AS employees LEFT JOIN ( SELECT employee_id, Concat('[', Group_concat('{', Concat('\"name\": ', '\"', name, '\", ', '\"description\": \"', description, '\", ' , '\"contact_email\": \"', contact_email, '\", ', '\"google_group\": \"', google_group, '\", ', '\"contact_link\": \"', contact_link, '\"'), '}' SEPARATOR ', '), ']') AS badge_group FROM badges_employees JOIN badges ON badges_employees.badge_id = badges.id WHERE badges_employees.is_active = 1 GROUP BY employee_id ) AS badge ON employees.employee_id = badge.employee_id LEFT JOIN ( SELECT a.employee_id employee_id, Group_concat(c.name) team_names FROM employees a, teams_employees b, teams c WHERE a.employee_id = b.employee_id AND b.team_id = c.id GROUP BY a.employee_id ) AS teams ON teams.employee_id = employees.employee_id LEFT JOIN ( SELECT assit_sub_id, Group_concat(assit_name SEPARATOR ', ') AS assit_name FROM ( SELECT Concat(first_name, \"\", last_name) AS assit_name, assistant_subject_id AS assit_sub_id FROM executive_assistant LEFT JOIN employees ON executive_assistant.assistant_id = employees.employee_id ) AS bridge GROUP BY assit_sub_id ) AS assit ON employees.employee_id = assit.assit_sub_id LEFT JOIN ( SELECT employee_id, Concat('{', Group_concat(Concat('\"', group_name, '\":', tags, '') SEPARATOR ', ') , '}') AS tags FROM ( SELECT employee_id, group_name, Concat('[', Group_concat('{', Concat('\"name\": ' , '\"', tag_name, '\", ', '\"proficiency\": \"', proficiency, '\"'), '}' SEPARATOR ', '), ']') AS tags FROM tags_employees LEFT JOIN ( SELECT tag_id, tag_name, group_name FROM tags LEFT JOIN groups ON tags.group_id = groups.group_id WHERE tags.is_active = 1 AND groups.is_active = 1 ) AS relation ON tags_employees.tag_id = relation.tag_id GROUP BY employee_id, group_name ) AS tags GROUP BY employee_id ) AS skills ON employees.employee_id COLLATE utf8mb4_unicode_ci = skills.employee_id COLLATE utf8mb4_unicode_ci\",\"target_collection\": \"uSearch-Whober\",\"is_db_output_processing_required\": false,\"is_read_only_sql_repo\": true}}",
+      "taskStartToCloseTimeoutInSeconds": 3600
+    }
+  },
+  "executionScope": "global",
+  "actionTimeoutInSeconds": 3600,
+  "enabled": true,
+  "metricsNamespace": "whober-gdbc-connector-scheduler"
+}

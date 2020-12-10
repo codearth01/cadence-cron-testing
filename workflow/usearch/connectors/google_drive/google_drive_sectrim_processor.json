@@ -12,6 +12,6 @@
     },
     "executionScope": "global",
     "actionTimeoutInSeconds": 7200,
-    "enabled": true,
+    "enabled": false,
     "metricsNamespace": "googledrive-sectrim-scheduler"
 }

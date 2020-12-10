@@ -13,6 +13,6 @@
   },
   "executionScope": "global",
   "actionTimeoutInSeconds": 3600,
-  "enabled": true,
+  "enabled": false,
   "metricsNamespace": "oc-grail-connector-scheduler"
 }
